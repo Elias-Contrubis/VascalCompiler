@@ -1,0 +1,55 @@
+README for the semanticActionsIV components 04/25/2019
+
+***To run the Compiler, in the main method (in Compiler class) insert the desired file name 
+as the new Lexer parameter*****
+
+Semantic Actions:
+The semantic actions implemented thus far implement eight semantic actions which will process variable
+declaration in the code. Semantic actions implemented: all
+
+additions:
+-gen()
+In the SemanticAction class, I created a gen function that gets called from all of the generate functions
+
+-helper45()
+In SemanticAction class, it helps sem. act. 45 and takes the opcode int value and returns the 
+corresponding ADDOP string
+
+-helper43()
+The same as helper45() except MULOP
+
+-helper39()
+The same as above but for RELOP
+
+Grammar: augmentedGrammar.txt
+
+
+
+Symbol Table:
+1) constant table: contains constants (strings) used in the program
+2) global symbol table: contains names known throughout all scopes of the Vascal program
+3) local symbol table: contains names known in a nested block while it is being parsed
+
+Additions to SymbolTableEntry:
+-getType()
+In the SymbolTableEntry class, this function gets the type for those STEs with a type
+its purpose is to help the typeChecker()
+
+-isConstant()
+In the SymbolTableEntry class, this function returns true for those STEs that are constants
+its purpose is to help the typeChecker()
+
+-getAddress()
+Returns 0 but is overridden in the ArrayEntry and VariableEntry class to return the address
+
+-addParameter()
+Does nothing but is overridden in FunctionEntry and ProcedureEntry to add a STE to the params
+
+-getParameterInfo()
+Does nothing but is overridden in FunctionEntry and ProcedureEntry to get the params
+
+-getNumberOfParameters()
+Does nothing but is overridden in FunctionEntry and ProcedureEntry to get the total number of params
+
+-setNumberOfParameters()
+Does nothing but is overridden in FunctionEntry and ProcedureEntry to set the total number of params
