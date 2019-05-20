@@ -1,55 +1,34 @@
-README for the semanticActionsIV components 04/25/2019
 
-***To run the Compiler, in the main method (in Compiler class) insert the desired file name 
+***To run the Compiler, in the main method, which can be found in the Compiler class, insert the desired file name 
 as the new Lexer parameter*****
 
+The main components of the Compiler are as outlined:
+
+Lexical Analyzer:
+The lexical analyzer (“lexer”) is designed to isolate tokens from an input source file containing 
+a program written in a language it is designed to recognise. For this project, your lexer will be designed 
+to recognise tokens in 'Vascal', a custom language which is a subset of Pascal. The lexer must be designed 
+so that it can be accessed by the parser, which you will write later in the semester.
+
+Parser:
+The function of the parser is to ensure that the stream of tokens conforms to the rules of the language; 
+that is, that the input is syntactically correct. It consists of three components:
+
+Parser: This code calls the lexical analyser for the next token in the stream until ENDOFFILE is reached 
+and manipulates the parse stack.
+RHS Table: This contains a list of right-hand sides (productions) for all non-terminals in the Vascal grammar.
+Parse table: This matrix is indexed by stack symbol (non-terminals and terminals) and the current symbol from
+the input stream (terminals only). Each cell contains an integer value which can represent a production number
+in the RHS table, an accept action, or an error.
+
+Symbol Tables:
+The symbol tables are used by the semantic actions, which are called at appropriate points in the parse to 
+insert names and information associated with them (when parsing declarations) and look up names used in the 
+body of the program (to see that they have been declared and are used appropriately according to the specifications 
+of their declarations). The semantic actions also use information about the stage of the parse to determine whether 
+an identfier is inserted into the local or global table.
+
 Semantic Actions:
-The semantic actions implemented thus far implement eight semantic actions which will process variable
-declaration in the code. Semantic actions implemented: all
-
-additions:
--gen()
-In the SemanticAction class, I created a gen function that gets called from all of the generate functions
-
--helper45()
-In SemanticAction class, it helps sem. act. 45 and takes the opcode int value and returns the 
-corresponding ADDOP string
-
--helper43()
-The same as helper45() except MULOP
-
--helper39()
-The same as above but for RELOP
-
-Grammar: augmentedGrammar.txt
-
-
-
-Symbol Table:
-1) constant table: contains constants (strings) used in the program
-2) global symbol table: contains names known throughout all scopes of the Vascal program
-3) local symbol table: contains names known in a nested block while it is being parsed
-
-Additions to SymbolTableEntry:
--getType()
-In the SymbolTableEntry class, this function gets the type for those STEs with a type
-its purpose is to help the typeChecker()
-
--isConstant()
-In the SymbolTableEntry class, this function returns true for those STEs that are constants
-its purpose is to help the typeChecker()
-
--getAddress()
-Returns 0 but is overridden in the ArrayEntry and VariableEntry class to return the address
-
--addParameter()
-Does nothing but is overridden in FunctionEntry and ProcedureEntry to add a STE to the params
-
--getParameterInfo()
-Does nothing but is overridden in FunctionEntry and ProcedureEntry to get the params
-
--getNumberOfParameters()
-Does nothing but is overridden in FunctionEntry and ProcedureEntry to get the total number of params
-
--setNumberOfParameters()
-Does nothing but is overridden in FunctionEntry and ProcedureEntry to set the total number of params
+The Semanitc Action is the part of the compiler that actually generates output rather than just checking an input
+against its grammar. Every time the Parser recognizes a match to a specific rule corresponding to a semantic action,
+that action is called.  The uses include generating out put, reporting warnings, and managing the symbol tables.
