@@ -6,18 +6,18 @@ The main components of the Compiler are as outlined:
 
 Lexical Analyzer:
 The lexical analyzer (“lexer”) is designed to isolate tokens from an input source file containing 
-a program written in a language it is designed to recognise. For this project, your lexer will be designed 
-to recognise tokens in 'Vascal', a custom language which is a subset of Pascal. The lexer must be designed 
-so that it can be accessed by the parser, which you will write later in the semester.
+a program written in a language it is designed to recognise. For this project, my lexer will is designed 
+to recognise tokens in 'Vascal', a custom language which is a subset of Pascal. The lexer is designed 
+so that it can be accessed by the parser.
 
 Parser:
 The function of the parser is to ensure that the stream of tokens conforms to the rules of the language; 
 that is, that the input is syntactically correct. It consists of three components:
 
-Parser: This code calls the lexical analyser for the next token in the stream until ENDOFFILE is reached 
+1 Parser: This code calls the lexical analyser for the next token in the stream until ENDOFFILE is reached 
 and manipulates the parse stack.
-RHS Table: This contains a list of right-hand sides (productions) for all non-terminals in the Vascal grammar.
-Parse table: This matrix is indexed by stack symbol (non-terminals and terminals) and the current symbol from
+2 RHS Table: This contains a list of right-hand sides (productions) for all non-terminals in the Vascal grammar.
+3 Parse table: This matrix is indexed by stack symbols (non-terminals and terminals) and the current symbol from
 the input stream (terminals only). Each cell contains an integer value which can represent a production number
 in the RHS table, an accept action, or an error.
 
